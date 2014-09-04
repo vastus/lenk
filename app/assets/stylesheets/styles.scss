@@ -1,0 +1,39 @@
+body {
+  color: #666;
+  width: 60em;
+  margin: 1em auto;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: .5em;
+  border: 1px solid #999;
+}
+
+.new .button {
+  display: none;
+}
+
+.link li {
+  padding: .5em 0;
+}
+
+.link a {
+  color: #666;
+  padding: .5em ;
+}
+
+.link a:hover {
+  color: #333;
+}
+
+.link li:hover {
+  background: rgb(250, 250, 250);
+}
+
+.link .time-ago {
+  color: #999;
+  font-style: italic;
+  font-family: georgia, serif;
+}
+
