@@ -1,0 +1,19 @@
+<div id="links">
+  <div class="new">
+    <%= form_for(@link) do |f| %>
+      <div class="field">
+        <%= f.text_field(:url, size: 128, placeholder: t('.form.fields.url.placeholder')) %>
+      </div>
+      <div class="button">
+        <%= f.submit(t('.add_link_btn')) %>
+      </div>
+    <% end %>
+  </div>
+
+  <ol class="link">
+    <% for link in @links %>
+      <li><%= link_to(link.url, link.url) %> &mdash; <span class="time-ago"><%= time_ago_in_words(link.updated_at, title: "hihi") %></span></li>
+    <% end %>
+  </ol>
+</div>
+
