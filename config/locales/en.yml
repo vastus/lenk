@@ -23,4 +23,8 @@ en:
   links:
     index:
       add_link_btn: "Add"
+      form:
+        fields:
+          url:
+            placeholder: "Paste your link here"
 
