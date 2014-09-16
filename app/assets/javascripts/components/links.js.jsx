@@ -1,0 +1,82 @@
+/** @jsx React.DOM */
+
+var Input = React.createClass({
+  handleSubmit: function() {
+    var node = this.refs.url.getDOMNode();
+    var url = node.value.trim();
+
+    console.log(url);
+    node.value = '';
+ 
+    // create new bb link model and save it
+
+    return false;
+  },
+
+  render: function () {
+    return (
+      <div className="new">
+        <form onSubmit={this.handleSubmit}>
+          <div className="field">
+            <input ref="url" type="text" placeholder="Paste your link here and hit Enter" />
+          </div>
+        </form>
+      </div>
+    );
+  }
+});
+
+var LinkItem = React.createClass({
+  render: function () {
+    return (
+      <li className="link">
+        <a href={this.props.link.url}>{this.props.link.url}</a>
+      </li>
+    );
+  }
+});
+
+var LinkList = React.createClass({
+  getInitialState: function () {
+    return {
+      links: []
+    }
+  },
+
+  render: function () {
+    var links = this.props.links.map(function (link) {
+      return <LinkItem key={link.id} link={link} />
+    });
+
+    return (
+      <ol id="link-list">
+        {links}
+      </ol>
+    );
+  }
+});
+
+function render() {
+  var links = [
+    {
+      id: 1,
+      url: 'http://www.52inc.co/learn-ios/'
+    },
+    {
+      id: 2,
+      url: 'http://reactive-extensions.github.io/RxJS/'
+    }
+  ];
+
+  React.renderComponent(
+    <div id="links">
+      <Input />
+      <LinkList links={links} />
+    </div>,
+    document.body
+  );
+}
+
+$(document).ready(render);
+
+
