@@ -42,8 +42,8 @@ var LinkList = React.createClass({
   },
 
   render: function () {
-    var links = this.props.links.map(function (link) {
-      return <LinkItem key={link.id} link={link} />
+    var links = this.state.links.map(function (link) {
+      return <LinkItem key={link.id} url={link.url} time_ago={link.time_ago} />
     });
 
     return (
