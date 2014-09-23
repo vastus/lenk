@@ -68,27 +68,19 @@ var LinkList = React.createClass({
   }
 });
 
-function render() {
-  var links = [
-    {
-      id: 1,
-      url: 'http://www.52inc.co/learn-ios/'
-    },
-    {
-      id: 2,
-      url: 'http://reactive-extensions.github.io/RxJS/'
-    }
-  ];
+var App = React.createClass({
+  render: function () {
+    return (
+      <div id="links">
+        <Input />
+        <LinkList />
+      </div>
+    );
+  }
+});
 
-  React.renderComponent(
-    <div id="links">
-      <Input />
-      <LinkList links={links} />
-    </div>,
-    document.body
-  );
-}
-
-$(document).ready(render);
+$(document).ready(function () {
+  React.renderComponent(<App />, document.body);
+});
 
 
