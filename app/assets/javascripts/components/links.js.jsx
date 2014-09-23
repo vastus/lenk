@@ -28,7 +28,9 @@ var LinkItem = React.createClass({
   render: function () {
     return (
       <li className="link">
-        <a href={this.props.link.url}>{this.props.link.url}</a>
+        <a href={this.props.url}>{this.props.url}</a>
+        &mdash;
+        <span className="time-ago">{this.props.time_ago}</span>
       </li>
     );
   }
