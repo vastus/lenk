@@ -4,8 +4,6 @@ var Input = React.createClass({
   handleSubmit: function() {
     var node = this.refs.url.getDOMNode();
     var url = node.value.trim();
-
-    console.log(url);
     node.value = '';
  
     // create new bb link model and save it
