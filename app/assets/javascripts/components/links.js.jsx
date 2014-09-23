@@ -1,14 +1,15 @@
 /** @jsx React.DOM */
 
-var Input = React.createClass({
-  handleSubmit: function() {
-    var node = this.refs.url.getDOMNode();
-    var url = node.value.trim();
-    node.value = '';
- 
-    // create new bb link model and save it
+var linksUrl = '/links';
 
-    return false;
+var Input = React.createClass({
+  handleSubmit: function(e) {
+    var node, url, link;
+    e.preventDefault();
+    node = this.refs.url.getDOMNode();
+    url = node.value.trim();
+    node.value = '';
+    this.props.onLinkSubmit({link: {url: url}});
   },
 
   render: function () {
@@ -29,34 +30,15 @@ var LinkItem = React.createClass({
     return (
       <li className="link">
         <a href={this.props.url}>{this.props.url}</a>
-        &mdash;
-        <span className="time-ago">{this.props.time_ago}</span>
+        &mdash; <span className="time-ago">{this.props.time_ago}</span>
       </li>
     );
   }
 });
 
 var LinkList = React.createClass({
-  getInitialState: function () {
-    return {
-      links: []
-    };
-  },
-
-  componentDidMount: function () {
-    var links = new Links();
-    var selfie = this;
-    links.fetch({
-      success: function (data) {
-        selfie.setState({
-          links: data.toJSON()
-        });
-      }
-    });
-  },
-
   render: function () {
-    var links = this.state.links.map(function (link) {
+    var links = this.props.links.map(function (link) {
       return <LinkItem key={link.id} url={link.url} time_ago={link.time_ago} />
     });
 
@@ -69,11 +51,35 @@ var LinkList = React.createClass({
 });
 
 var App = React.createClass({
+  getInitialState: function () {
+    return {
+      links: []
+    };
+  },
+
+  componentDidMount: function () {
+    $.get(linksUrl, function (data) {
+      if (this.isMounted) {
+        this.setState({
+          links: data
+        });
+      }
+    }.bind(this), 'json')
+  },
+
+  handleLinkSubmit: function (link) {
+    $.post(linksUrl, link, function (data) {
+      this.setState({
+        links: [data].concat(this.state.links)
+      });
+    }.bind(this), 'json');
+  },
+
   render: function () {
     return (
       <div id="links">
-        <Input />
-        <LinkList />
+        <Input onLinkSubmit={this.handleLinkSubmit} />
+        <LinkList links={this.state.links} />
       </div>
     );
   }
