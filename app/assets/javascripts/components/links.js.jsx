@@ -40,7 +40,19 @@ var LinkList = React.createClass({
   getInitialState: function () {
     return {
       links: []
-    }
+    };
+  },
+
+  componentDidMount: function () {
+    var links = new Links();
+    var selfie = this;
+    links.fetch({
+      success: function (data) {
+        selfie.setState({
+          links: data.toJSON()
+        });
+      }
+    });
   },
 
   render: function () {
