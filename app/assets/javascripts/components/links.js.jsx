@@ -103,4 +103,3 @@ $(document).ready(function () {
   React.renderComponent(<App />, document.body);
 });
 
-
