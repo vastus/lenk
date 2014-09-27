@@ -77,9 +77,14 @@ var App = React.createClass({
   },
 
   handleLinkSubmit: function (link) {
-    $.post(linksUrl, link, function (data) {
+    var links = this.state.links;
+
+    this.setState({
+      links: [link].concat(links)
+    });
+    $.post(linksUrl, {link: link}, function (data) {
       this.setState({
-        links: [data].concat(this.state.links)
+        links: [data].concat(links)
       });
     }.bind(this), 'json');
   },
