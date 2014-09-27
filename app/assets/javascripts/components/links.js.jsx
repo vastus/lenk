@@ -2,6 +2,14 @@
 
 var linksUrl = '/links';
 
+function buildLink(url) {
+  return {
+    id: -1,
+    url: url,
+    time_ago: 'less than a minute'
+  };
+}
+
 var Input = React.createClass({
   handleSubmit: function(e) {
     var node, url, link;
