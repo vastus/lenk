@@ -13,11 +13,12 @@ function buildLink(url) {
 var Input = React.createClass({
   handleSubmit: function(e) {
     var node, url, link;
-    e.preventDefault();
     node = this.refs.url.getDOMNode();
     url = node.value.trim();
+    link = buildLink(url);
+    e.preventDefault();
     node.value = '';
-    this.props.onLinkSubmit({link: {url: url}});
+    this.props.onLinkSubmit(link);
   },
 
   render: function () {
