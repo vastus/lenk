@@ -5,5 +5,14 @@
       <%= f.text_field(:name, :value => "", :placeholder => "Desired list name") %>
   <% end %>
   </section>
+
+  <section id="list-global">
+    <h2>links in <%= link_to("global", list_path(@global_list)) %>:</h2>
+    <% @global_links.each do |link| %>
+      <div class="link">
+        <%= link_to(link.url, link.url) %>
+      </div>
+    <% end %>
+  </section>
 </section>
 

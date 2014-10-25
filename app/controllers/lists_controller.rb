@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
   def index
     @list = List.new
-    @lists = List.all
+    @global_list = List.find_by(:name => "global")
+    @global_links = @global_list.links.order("updated_at DESC").limit(10)
   end
 
   def show
