@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var linksUrl = '/links';
+var linksUrl = '/api/v1/lists/1/links';
 
 function buildLink(url) {
   return {
@@ -100,6 +100,9 @@ var App = React.createClass({
 });
 
 $(document).ready(function () {
-  React.renderComponent(<App />, document.body);
+  var linksElem = document.getElementById('links')
+  if (linksElem) {
+    React.renderComponent(<App />, linksElem);
+  }
 });
 

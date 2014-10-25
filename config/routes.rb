@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
-  root('links#index')
+  # Home
+  root('lists#index')
 
-  resources :links
+  # Resources
+  resources(:lists)
+  resources(:links)
+
+  # Api::V1
+  namespace(:api) do
+    namespace(:v1) do
+      get({"lists/:id/links" => "lists#show"})
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

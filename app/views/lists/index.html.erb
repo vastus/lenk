@@ -1,0 +1,9 @@
+<section id="lists">
+  <section class="new">
+    <h2>lists &mdash; goto / create</h2>
+    <%= form_for(@list) do |f| %>
+      <%= f.text_field(:name, :value => "", :placeholder => "Desired list name") %>
+  <% end %>
+  </section>
+</section>
+
