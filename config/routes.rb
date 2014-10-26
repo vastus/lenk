@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace(:api) do
     namespace(:v1) do
       get({"lists/:id/links" => "lists#show"})
+      post({"lists/:id/links" => "links#create"})
     end
   end
 

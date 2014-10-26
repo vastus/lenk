@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
-var linksUrl = '/api/v1/lists/1/links';
+var pathname = window.location.pathname;
+var linksUrl = '/api/v1' + pathname + '/links';
 
 function buildLink(url) {
   return {
