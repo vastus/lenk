@@ -14,7 +14,7 @@ class List < ActiveRecord::Base
   # scope(:public) -> { where("public = true") }
 
   def self.from_name(name)
-    where("lower(name) = ?", name.downcase).first_or_create
+    where(:name => name.downcase).first_or_create
   end
 end
 
