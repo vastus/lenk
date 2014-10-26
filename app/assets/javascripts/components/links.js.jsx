@@ -2,7 +2,6 @@
 
 var pathname = window.location.pathname;
 var linksUrl = '/api/v1' + pathname + '/links';
-console.log(linksUrl);
 
 function buildLink(url) {
   return {
