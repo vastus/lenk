@@ -36,6 +36,11 @@ var Input = React.createClass({
 });
 
 var LinkItem = React.createClass({
+  concat: function() {
+    var maxLinkLength = 80;
+    return this.props.url.length > maxLinkLength ? this.props.url.substring(0, maxLinkLength) + "..." : this.props.url;
+  },
+
   removeLink: function () {
     this.setState({ visible: false });
     this.props.handleLinkRemoval(this.props.key);
@@ -51,7 +56,7 @@ var LinkItem = React.createClass({
     if (this.state.visible) {
       return (
         <li className="link">
-          <a href={this.props.url}>{this.props.url}</a>
+          <a href={this.props.url}>{this.concat()}</a>
           &mdash; <span className="time-ago">{this.props.time_ago}</span>
           <span onClick={this.removeLink} className="remove-link hide" title="Remove this link">
             &times;
@@ -63,7 +68,6 @@ var LinkItem = React.createClass({
         <span />
       );
     }
-  }
 });
 
 var LinkList = React.createClass({
