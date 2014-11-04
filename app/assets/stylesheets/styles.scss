@@ -37,3 +37,17 @@ input[type=text] {
   font-family: georgia, serif;
 }
 
+.link .remove-link {
+  float: right;
+  padding-right: 1em;
+  cursor: pointer;
+}
+
+.link:hover .remove-link {
+  display: inline-block;
+}
+
+.hide {
+  display: none;
+}
+

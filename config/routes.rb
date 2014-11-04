@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace(:v1) do
       get({"lists/:id/links" => "lists#show"})
       post({"lists/:id/links" => "links#create"})
+      delete({"lists/:id/links/:link_id" => "links#destroy"})
     end
   end
 
