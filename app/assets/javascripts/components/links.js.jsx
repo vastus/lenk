@@ -36,10 +36,16 @@ var Input = React.createClass({
 });
 
 var LinkItem = React.createClass({
+
+  concat: function() {
+    var maxLinkLength = 80;
+    return this.props.url.length > maxLinkLength ? this.props.url.substring(0, maxLinkLength) + "..." : this.props.url;
+  },
+
   render: function () {
     return (
       <li className="link">
-        <a href={this.props.url}>{this.props.url}</a>
+        <a href={this.props.url}>{this.concat()}</a>
         &mdash; <span className="time-ago">{this.props.time_ago}</span>
       </li>
     );
