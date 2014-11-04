@@ -36,20 +36,48 @@ var Input = React.createClass({
 });
 
 var LinkItem = React.createClass({
+  removeLink: function () {
+    this.setState({ visible: false });
+    this.props.handleLinkRemoval(this.props.key);
+  },
+
+  getInitialState: function () {
+    return {
+      visible: true
+    };
+  },
+
   render: function () {
-    return (
-      <li className="link">
-        <a href={this.props.url}>{this.props.url}</a>
-        &mdash; <span className="time-ago">{this.props.time_ago}</span>
-      </li>
-    );
+    if (this.state.visible) {
+      return (
+        <li className="link">
+          <a href={this.props.url}>{this.props.url}</a>
+          &mdash; <span className="time-ago">{this.props.time_ago}</span>
+          <span onClick={this.removeLink} className="remove-link hide" title="Remove this link">
+            &times;
+          </span>
+        </li>
+      );
+    } else {
+      return (
+        <span />
+      );
+    }
   }
 });
 
 var LinkList = React.createClass({
   render: function () {
+    var handleLinkRemoval = this.props.handleLinkRemoval;
     var links = this.props.links.map(function (link) {
-      return <LinkItem key={link.id} url={link.url} time_ago={link.time_ago} />
+      return (
+        <LinkItem
+          key={link.id}
+          url={link.url}
+          time_ago={link.time_ago}
+          handleLinkRemoval={handleLinkRemoval}
+        />
+      );
     });
 
     return (
@@ -83,6 +111,7 @@ var App = React.createClass({
     this.setState({
       links: [link].concat(links)
     });
+
     $.post(linksUrl, {link: link}, function (data) {
       this.setState({
         links: [data].concat(links)
@@ -90,11 +119,17 @@ var App = React.createClass({
     }.bind(this), 'json');
   },
 
+  handleLinkRemoval: function (linkId) {
+    $.post(linksUrl + '/' + linkId, {
+      '_method': 'delete'
+    });
+  },
+
   render: function () {
     return (
       <div id="links">
         <Input onLinkSubmit={this.handleLinkSubmit} />
-        <LinkList links={this.state.links} />
+        <LinkList handleLinkRemoval={this.handleLinkRemoval} links={this.state.links} />
       </div>
     );
   }
