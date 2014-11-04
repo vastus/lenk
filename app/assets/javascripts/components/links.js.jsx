@@ -68,6 +68,7 @@ var LinkItem = React.createClass({
         <span />
       );
     }
+  }
 });
 
 var LinkList = React.createClass({
